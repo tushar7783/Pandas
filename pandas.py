@@ -107,3 +107,87 @@ print(df_1.info())
 print(df_1.describe())
 
 
+# =====================================================
+# SAVE AND LOAD DATA FROM CSV
+# =====================================================
+
+# Export DataFrame to CSV file
+# index=False prevents pandas from creating an extra index column
+df_1.to_csv('test_data.csv', index=False)
+
+print("Data successfully saved to test_data.csv")
+
+# Read data from CSV file
+load_df = pd.read_csv('test_data.csv')
+
+print("\nLoaded DataFrame:")
+print(load_df)
+
+# =====================================================
+# COLUMN SELECTION
+# =====================================================
+
+print("\nSelecting only the Name column:")
+print(load_df[['Name']])
+
+print("\nSelecting Name and Monthly_salary columns:")
+print(load_df[['Name', 'Monthly_salary']])
+
+# =====================================================
+# ROW SELECTION USING LOC
+# =====================================================
+
+# loc is label-based indexing
+# It is commonly used for:
+# 1. Filtering rows using conditions
+# 2. Selecting rows and columns by labels
+
+print("\nRecords where Name is Tushar:")
+print(load_df.loc[load_df['Name'] == 'Tushar'])
+
+# Multiple conditions using &
+# Both conditions must be True
+
+print("\nRecords where Name is Tushar AND Monthly_salary >= 50000:")
+print(
+    load_df.loc[
+        (load_df['Name'] == 'Tushar') &
+        (load_df['Monthly_salary'] >= 50000)
+    ]
+)
+
+# =====================================================
+# ROW SELECTION USING ILOC
+# =====================================================
+
+# iloc is position-based indexing
+# It works using row and column numbers
+
+print("\nFirst row using iloc")
+print(load_df.iloc[0])
+
+print("\nFirst two rows using iloc[0:2]:")
+print(load_df.iloc[0:2])
+
+print("\nDisplay all rows:")
+print(load_df.iloc[:])
+
+# =====================================================
+# DIFFERENCE BETWEEN LOC AND ILOC
+# =====================================================
+
+print("\nloc[0:2] -> Includes index 2")
+print(load_df.loc[0:2])
+
+print("\niloc[0:2] -> Excludes index 2")
+print(load_df.iloc[0:2])
+
+# =====================================================
+# EXPLANATION
+# =====================================================
+
+print("\nDifference between loc and iloc:")
+print("loc  -> Uses row/column labels and includes ending index.")
+print("iloc -> Uses row/column positions and excludes ending index.")
+
+
